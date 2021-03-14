@@ -1,0 +1,68 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/754914d001.js" crossorigin="anonymous"></script>
+    <title>Joke of the Day</title>
+</head>
+<body>
+
+    <div id="wrap">
+        <div id="container">
+            <h1 id="title">Dad joke of the day</h1>
+            <div id="joke">
+                <p>I got hit in the head with a can of Diet Coke today. Don’t worry, I’m not hurt. It was a soft drink.</p>
+            </div>
+            
+            <div id="likes">
+                <i class='far fa-thumbs-up'></i>
+                <span id="total-likes"></span>
+            </div>
+            <button id="new-joke">New joke</button>
+        </div>
+    </div>
+<script>
+
+    let jokes = ["I got hit in the head with a can of Diet Coke today. Don’t worry, I’m not hurt. It was a soft drink.","The difference between a numerator and a denominator is a short line. Only a fraction of people will understand it.","We all know about Murphy’s Law: anything that can go wrong will go wrong. But have you heard of Cole’s Law? It’s thinly sliced cabbage.","I've been thinking about taking up meditation. Better than sitting around doing nothing.","I bought some shoes from a drug dealer. I don't know what he laced them with, but I was tripping all day!","I heard Youtube, Twitter, and Facebook are all merging. They're going to call it You-Twit-Face." ];
+
+    function randomGenerator(){
+        return Math.round((Math.random() * (jokes.length - 1)));
+    }
+    
+    $('#new-joke').click(function() {
+
+         // Get current joke being displayed
+        let current = $('#joke p').text();
+        
+        // Get index of current joke 
+        let currentIndex = jokes.indexOf(current);
+
+        // Generate random index
+        let random = randomGenerator();
+
+        // Check if random index === current index and correct if true
+        if(random === currentIndex) {
+            random = recurse();
+        }
+
+        // Recursive function that ensures that the newly generated index !== index of current joke, i.e. same joke isn't displayed after clicking 'New joke'
+        function recurse() {
+            random = randomGenerator();
+            if(random !== currentIndex) {return random}
+            if(random === currentIndex) {recurse()}
+        }
+
+        let likes = Math.round((Math.random() * 500));
+        
+        // Replace with new content
+        $('#joke p').text(jokes[random]);
+        $('#total-likes').text(likes)
+        
+    })
+
+</script>
+</body>
+</html>
