@@ -15,7 +15,7 @@ function randomGenerator(){
 
 $('#new-joke').click(function() {
 
-        // Get current joke being displayed
+    // Get current joke being displayed
     let current = $('#joke p').text();
     
     // Get index of current joke 
